@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip show python-pptx)",
+      "Bash(pip install python-pptx)",
+      "Bash(python \"D:\\01_code\\read_pptx.py\")",
+      "Bash(python \"D:\\01_code\\update_pptx.py\")",
+      "Bash(python \"D:\\01_code\\analyze_pptx_style.py\")",
+      "Bash(git add index.html)",
+      "Bash(git commit -m \"Add Reels Code landing page with Google Forms integration\")",
+      "Bash(python \"D:\\01_code\\update_pptx_styled.py\")",
+      "Bash(python \"D:\\01_code\\read_product_leader_pptx.py\")",
+      "Bash(python \"D:\\01_code\\update_international_expansion.py\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

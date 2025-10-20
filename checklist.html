@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>릴스 매출 전환 체크리스트 | 릴스코드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5a962 0%, #d4a574 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f5a962 0%, #d4a574 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .intro {
+            background: #fff5ec;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 4px solid #f5a962;
+        }
+
+        .intro h2 {
+            font-size: 20px;
+            color: #f5a962;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f5a962;
+        }
+
+        .checklist {
+            display: grid;
+            gap: 15px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .checklist-item:hover {
+            background: #fff5ec;
+            transform: translateX(5px);
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #f5a962;
+            border-radius: 6px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+        }
+
+        .checkbox::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #f5a962;
+            font-size: 16px;
+            font-weight: bold;
+            opacity: 0;
+        }
+
+        .checklist-item:hover .checkbox::after {
+            opacity: 1;
+        }
+
+        .checklist-text {
+            flex: 1;
+        }
+
+        .checklist-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .checklist-text p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .tip {
+            background: #e8f5e9;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+            border-left: 4px solid #4caf50;
+        }
+
+        .tip strong {
+            color: #4caf50;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #f5a962 0%, #d4a574 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-box h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            font-size: 15px;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: white;
+            color: #f5a962;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .print-btn {
+            background: #333;
+            color: white;
+            margin-top: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            .print-btn, .cta-box {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .checklist-item {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💡 릴스 매출 전환 체크리스트</h1>
+            <p>조회수를 실제 매출로 바꾸는 10가지 필수 요소</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <h2>🎯 이 체크리스트를 사용하는 방법</h2>
+                <p>다음 릴스를 만들기 전, 아래 10가지 항목을 체크하세요. 5개 이상 체크되지 않는다면, 조회수만 높고 매출로 이어지지 않을 확률이 높습니다.</p>
+            </div>
+
+            <!-- Section 1: 콘텐츠 설계 -->
+            <div class="section">
+                <h2 class="section-title">📊 1. 콘텐츠 설계 (3가지)</h2>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>첫 3초에 타겟 고객의 관심을 확실히 잡는가?</h3>
+                            <p>예: "매출 3배 늘린 릴스 비법" vs "오늘의 일상 브이로그"</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> 숫자, 질문, 놀라운 사실로 시작하세요
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>타겟 고객이 명확한가? (누구를 위한 콘텐츠인가?)</h3>
+                            <p>예: "카페 사장님들을 위한" vs "모두를 위한"</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> 모두를 위한 콘텐츠는 아무도 보지 않습니다
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>고객의 '문제'와 '해결책'이 명확한가?</h3>
+                            <p>문제: "손님이 없어요" → 해결: "이 릴스 하나로 예약 10건 받았어요"</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> 공감 → 해결 → 증명 순서로 구성
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: 행동 유도 -->
+            <div class="section">
+                <h2 class="section-title">🎯 2. 행동 유도 (CTA) (3가지)</h2>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>명확한 행동 유도(CTA)가 있는가?</h3>
+                            <p>"링크 클릭", "DM 주세요", "댓글 남기세요" 등 구체적 요청</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> CTA 없는 릴스는 조회수만 높고 전환율 0%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>프로필 링크가 설정되어 있는가?</h3>
+                            <p>프로필 → 링크 편집 → 랜딩페이지 또는 예약 링크</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> "프로필 링크 클릭" CTA 사용 시 필수
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>댓글로 문의를 유도하는가?</h3>
+                            <p>"궁금한 점 댓글 남기세요" → 댓글 답변으로 관계 형성</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> 댓글 많을수록 알고리즘 상승
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: 신뢰도 구축 -->
+            <div class="section">
+                <h2 class="section-title">🤝 3. 신뢰도 구축 (2가지)</h2>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>실제 결과나 증거를 보여주는가?</h3>
+                            <p>Before/After, 숫자, 고객 후기 등</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> "이렇게 하면 좋아요"보다 "이렇게 했더니 이런 결과"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>전문성과 경험이 드러나는가?</h3>
+                            <p>자격증, 경력, 실제 사례, 구체적 방법론</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> 디테일이 신뢰를 만듭니다
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: 최적화 -->
+            <div class="section">
+                <h2 class="section-title">⚙️ 4. 최적화 (2가지)</h2>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>해시태그가 타겟에 맞게 설정되었는가?</h3>
+                            <p>대중 해시태그 + 타겟 해시태그 믹스 (5-10개)</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> #릴스 같은 광범위 태그만 쓰면 타겟 미도달
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="checklist-text">
+                            <h3>캡션에 검색 가능한 키워드가 포함되었는가?</h3>
+                            <p>고객이 검색할 만한 단어 사용 (업종, 지역, 문제점)</p>
+                            <div class="tip">
+                                <strong>💡 TIP:</strong> 인스타그램은 캡션도 검색합니다
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-box">
+                <h3>✅ 5개 미만이 체크되셨나요?</h3>
+                <p>지금 바로 무료 진단을 받고<br>매출로 연결되는 릴스 전략을 세워보세요!</p>
+                <a href="https://reelscode.netlify.app/" class="btn">무료 상담 신청하기</a>
+                <br>
+                <button onclick="window.print()" class="btn print-btn">📄 PDF로 저장하기</button>
+            </div>
+
+            <div class="footer">
+                <p><strong>릴스코드</strong> | reels_code_official</p>
+                <p style="margin-top: 10px; font-size: 12px; color: #999;">© 2025 릴스코드. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 체크박스 인터랙션 (선택사항)
+        document.querySelectorAll('.checklist-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.background = this.style.background === 'rgb(255, 245, 236)' ? '#f9f9f9' : '#fff5ec';
+                const checkbox = this.querySelector('.checkbox');
+                checkbox.style.background = checkbox.style.background === 'rgb(245, 169, 98)' ? '' : '#f5a962';
+            });
+        });
+    </script>
+</body>
+</html>
