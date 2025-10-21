@@ -1,0 +1,26 @@
+# Python files (not related to landing page)
+*.py
+*.pyc
+__pycache__/
+
+# PowerPoint files (portfolio files)
+developer_portfolio/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
